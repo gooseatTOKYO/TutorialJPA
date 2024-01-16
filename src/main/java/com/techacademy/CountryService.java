@@ -11,13 +11,12 @@ public class CountryService {
 
     @Autowired
     public CountryService(CountryRepository repository) {
-            this.repository = repository;
+        this.repository = repository;
     }
 
-    //全件を検索して返す
-    public List<Country> getCountryList(){
-        //リポジトリのfindAllメソッドを呼び出す
+    // 全件を検索して返す
+    public List<Country> getCountryList() {
+        // リポジトリのfindAllメソッドを呼び出す
         return repository.findAll();
     }
-
 }
