@@ -26,7 +26,6 @@ public class CountryController {
         return "country/list";
     }
 
-    // ----- 追加:ここから -----
     // ----- 詳細画面 -----
     @GetMapping(value = { "/detail", "/detail/{code}/" })
     public String getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
@@ -38,11 +37,11 @@ public class CountryController {
         return "country/detail";
     }
 
-    // ----- 更新（追加） -----
+    // ----- 更新 ----
     @PostMapping("/detail")
     public String postCountry(@RequestParam("code") String code, @RequestParam("name") String name,
             @RequestParam("population") int population, Model model) {
-        // 更新（追加）
+        // 更新
         service.updateCountry(code, name, population);
 
         // 一覧画面にリダイレクト
@@ -50,8 +49,11 @@ public class CountryController {
     }
 
     // ----- 削除画面 -----
-    @GetMapping("/delete")
-    public String deleteCountryForm(Model model) {
+    @GetMapping("/delete/{code}/")
+    public String deleteCountryForm(@PathVariable(name = "code", required = false) String code,Model model) {
+        // Modelに登録
+        model.addAttribute("code", code);
+
         // country/delete.htmlに画面遷移
         return "country/delete";
     }
